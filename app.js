@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
 const authRoute = require('./api/routes/authRoute')
+const geoTagRoute = require('./api/routes/geoTagRoute')
 const cors = require('cors')
 const mongoose = require('mongoose')
 
@@ -24,6 +25,7 @@ mongoose.connect(process.env.MONGODB_DB_URI, { useUnifiedTopology: true, useNewU
     })
 
 app.use('/auth', authRoute)
+app.use('/geoTag', geoTagRoute)
 
 app.get('/',(req,res)=>{
     res.status(200).json({
