@@ -64,16 +64,16 @@ router.post('/create', verifyToken, (req,res) => {
     })
 })
 
-router.post('/getAllGeoTags', verifyToken, (req,res) =>{
+router.get('/getAllGeoTags', verifyToken, (req,res) =>{
 
-    if (!req.body.userId) {
+    if (!req.query.userId) {
         return res.status(400).json({
           status: 400,
           erroMessage: 'Missing required parameters. Refer documentation'
         })
     }
 
-    GeoTag.find({userId : req.body.userId})
+    GeoTag.find({userId : req.query.userId})
      .then((geotags) => {
          return res.status(200).json({
              status: 200,
@@ -90,30 +90,30 @@ router.post('/getAllGeoTags', verifyToken, (req,res) =>{
     })
 })
 
-router.post('/locationTag', verifyToken, (req,res) =>{
+router.get('/locationTag', verifyToken, (req,res) =>{
 
-    if (!req.body.userId) {
+    if (!req.query.userId) {
         return res.status(400).json({
           status: 400,
           erroMessage: 'Missing required parameters. Refer documentation'
         })
     }
 
-    if (!req.body.lat) {
+    if (!req.query.lat) {
         return res.status(400).json({
           status: 400,
           erroMessage: 'Missing required parameters. Refer documentation'
         })
     }
 
-    if (!req.body.lon) {
+    if (!req.query.lon) {
         return res.status(400).json({
           status: 400,
           erroMessage: 'Missing required parameters. Refer documentation'
         })
     }
 
-    GeoTag.find({userId : req.body.userId, lat: req.body.lat, lon: req.body.lon})
+    GeoTag.find({userId : req.query.userId, lat: req.query.lat, lon: req.query.lon})
      .then((geotags) => {
          return res.status(200).json({
              status: 200,
